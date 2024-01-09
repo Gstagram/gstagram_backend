@@ -1,23 +1,22 @@
-package com.gstagram.gstagram.city.domain;
+package com.gstagram.gstagram.booklet.domain;
 
 import com.gstagram.gstagram.region.domain.Region;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class City {
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+public class Booklet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "city_name", nullable = false)
-    private String cityName;
-
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "region_id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Region region;
 }
+

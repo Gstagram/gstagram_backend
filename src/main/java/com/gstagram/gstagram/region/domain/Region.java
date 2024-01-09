@@ -14,11 +14,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long regionId;
+    private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "region_name", nullable = false)
     private String regionName;
 
-    @Column(nullable = false)
+    @Column(name = "user_count", nullable = false)
     private int userCount;
 }

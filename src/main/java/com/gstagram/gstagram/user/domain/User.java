@@ -3,7 +3,11 @@ package com.gstagram.gstagram.user.domain;
 import com.gstagram.gstagram.common.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -22,6 +26,10 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     private String nickname;
+
+    @Column(nullable = false)
+    @CreatedDate
+    private LocalDateTime createdDate;
 
     @Column(name = "is_user_authorized",nullable = false)
     private Boolean isUserAuthorized;
