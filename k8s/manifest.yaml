@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gstagram-deployment
+  namespace: gstagram
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: gstagram
+  template:
+    metadata:
+      labels:
+        app: gstagram
+    spec:
+      containers:
+        - name: gstagram
+          image: synoti21/gstagram-backend:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: gstagram-secret
+          resources:
+            requests:
+              memory: "2G"
+              cpu: 0.2
+            limits:
+              memory: "4G"
+              cpu: 1
+          ports:
+            - containerPort: 8080
+#          readinessProbe:
+#            httpGet:
+#              path: /swagger-ui/index.html
+#              port: 8080
+#            initialDelaySeconds: 40
+#            periodSeconds: 5
+#            failureThreshold: 24
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gstagram-svc
+  namespace: gstagram
+spec:
+  selector:
+    app: gstagram
+  ports:
+    - protocol: TCP
+      port: 7000
+      targetPort: 8080
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gstagram-route
+  namespace: gstagram
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`gstagram.thisiswandol.com`)
+      kind: Rule
+      services:
+        - name: gstagram-svc
+          port: 7000
+  tls:
+    certResolver: myresolver
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: gstagram-hpa
+  namespace: gstagram
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: gstagram-deployment
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 50
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
