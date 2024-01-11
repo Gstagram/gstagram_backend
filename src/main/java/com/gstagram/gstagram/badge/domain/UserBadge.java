@@ -2,9 +2,7 @@ package com.gstagram.gstagram.badge.domain;
 
 import com.gstagram.gstagram.user.domain.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -15,22 +13,31 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 class UserBadgeId implements Serializable {
+    @Column(name = "user_id")
     private Long userId;
+
+    @Column(name = "badge_id")
     private Long badgeId;
 }
 
 @Entity(name = "user_badge")
 @IdClass(UserBadgeId.class)
+@Getter
 @EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserBadge {
     @Id
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Long userId;
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "badge_id")
+    private Long badgeId;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "badge_id", insertable = false, updatable = false)
     private Badge badge;
 
     @CreatedDate

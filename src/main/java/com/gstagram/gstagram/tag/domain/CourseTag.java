@@ -10,7 +10,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 class CourseTagId implements Serializable {
+    @Column(name = "course_id")
     private Long courseId;
+
+    @Column(name = "tag_id")
     private Long tagId;
 }
 
@@ -20,12 +23,16 @@ class CourseTagId implements Serializable {
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CourseTag {
     @Id
-    @JoinColumn(name = "course_id")
+    private Long courseId;
+
+    @Id
+    private Long tagId;
+
+    @JoinColumn(name = "course_id", insertable = false, updatable = false)
     @ManyToOne
     private Course course;
 
-    @Id
-    @JoinColumn(name = "tag_id")
+    @JoinColumn(name = "tag_id", insertable = false, updatable = false)
     @ManyToOne
     private Tag tag;
 }

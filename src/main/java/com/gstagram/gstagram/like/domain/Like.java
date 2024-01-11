@@ -17,7 +17,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 class LikeId implements Serializable {
+    @Column(name = "user_id")
     private Long userId;
+
+    @Column(name = "course_id")
     private Long courseId;
 }
 
@@ -27,13 +30,17 @@ class LikeId implements Serializable {
 @EntityListeners(AuditingEntityListener.class)
 public class Like {
     @Id
-    @JoinColumn(name = "user_id")
-    @ManyToOne
-    private User user;
+    private Long userId;
 
     @Id
-    @JoinColumn(name = "course_id")
-    @ManyToOne
+    private Long courseId;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "course_id", insertable = false, updatable = false)
     private Course course;
 
     @Column(name = "created_date", nullable = false)
