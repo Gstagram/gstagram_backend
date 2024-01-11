@@ -24,16 +24,19 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column()
     private String nickname;
 
-    @Column(nullable = false)
+    @Column(name = "created_date", nullable = false)
     @CreatedDate
     private LocalDateTime createdDate;
+
+    @Column(name = "last_connect_date", nullable = false)
+    private LocalDateTime lastConnectDate;
 
     @Column(name = "is_user_authorized",nullable = false)
     private Boolean isUserAuthorized;
 
-    @Column(name = "profile_image_s3_url", nullable = true)
+    @Column(name = "profile_image_s3_url")
     private String profileImageS3Url;
 }
