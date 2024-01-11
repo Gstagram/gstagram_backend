@@ -22,6 +22,7 @@ class UserCityId implements Serializable {
 
 @Entity(name = "user_city")
 @Getter
+@IdClass(UserCityId.class)
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class UserCity {
