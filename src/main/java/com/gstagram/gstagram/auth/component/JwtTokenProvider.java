@@ -27,9 +27,6 @@ public class JwtTokenProvider {
     //내부 암호화 키
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
-    //1주일
-    private final long refreshTokenValidTime = 7 * 24 * 60 * 60 * 1000L;
-
     public String createAccessToken(String userPK) {
         Claims claims = Jwts.claims().setSubject(userPK);
         Date now = new Date();
@@ -46,6 +43,8 @@ public class JwtTokenProvider {
     public String createRefreshToken(String userPK) {
         Claims claims = Jwts.claims().setSubject(userPK);
         Date now = new Date();
+        //1주일
+        long refreshTokenValidTime = 7 * 24 * 60 * 60 * 1000L;
         String refreshToken = Jwts.builder()
                 .signWith(key)
                 .setClaims(claims)
