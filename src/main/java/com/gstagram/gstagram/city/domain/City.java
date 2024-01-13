@@ -2,14 +2,13 @@ package com.gstagram.gstagram.city.domain;
 
 import com.gstagram.gstagram.region.domain.Region;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class City {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +21,4 @@ public class City {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Region region;
 
-    @Builder
-    public City(Long id, String cityName, Region region) {
-        this.id = id;
-        this.cityName = cityName;
-        this.region = region;
-    }
 }
