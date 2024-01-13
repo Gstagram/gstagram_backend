@@ -1,8 +1,8 @@
 package com.gstagram.gstagram.region.domain;
 
-import com.gstagram.gstagram.config.JpaAuditingConfig;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -13,7 +13,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class Region {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "region_name", nullable = false)
@@ -21,4 +21,16 @@ public class Region {
 
     @Column(name = "user_count", nullable = false)
     private int userCount;
+
+    @Builder
+    public Region(Long id, String regionName) {
+        this.id = id;
+        this.regionName = regionName;
+    }
+
+    // region user 수 증가용
+    // only 한 명만 증가 되도록
+    public void addUserCount() {
+        this.userCount ++;
+    }
 }
