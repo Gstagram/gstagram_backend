@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: gstagram
-          image: synoti21/gstagram-backend:latest
+          image: synoti21/gstagram_backend:latest
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
@@ -23,10 +23,10 @@ spec:
           resources:
             requests:
               memory: "2G"
-              cpu: 0.2
+              cpu: "0.2"
             limits:
               memory: "4G"
-              cpu: 1
+              cpu: "1"
           ports:
             - containerPort: 8080
 #          readinessProbe:
