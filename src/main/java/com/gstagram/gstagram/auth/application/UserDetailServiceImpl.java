@@ -1,5 +1,7 @@
-package com.gstagram.gstagram.config;
+package com.gstagram.gstagram.auth.application;
 
+import com.gstagram.gstagram.common.api.ResponseCode;
+import com.gstagram.gstagram.common.exception.UserException;
 import com.gstagram.gstagram.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
