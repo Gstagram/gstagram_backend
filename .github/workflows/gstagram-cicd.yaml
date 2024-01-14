@@ -28,6 +28,8 @@ jobs:
           DB_ENDPOINT: ${{ secrets.DB_ENDPOINT }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          REDIS_PORT: ${{ secrets.REDIS_PORT }}
         with:
           arguments: build
 
