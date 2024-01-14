@@ -1,5 +1,7 @@
 package com.gstagram.gstagram.auth.component;
 
+import com.gstagram.gstagram.common.api.ResponseCode;
+import com.gstagram.gstagram.common.exception.BaseException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
@@ -91,13 +93,12 @@ public class JwtTokenProvider {
             return true;
         } catch (ExpiredJwtException e) {
             log.error("ExpiredJwtException", e);
-            return false;
+            throw new BaseException(ResponseCode.TOKEN_VALIDATION_FAILURE);
         } catch(JwtException e) {
             log.error("JwtException", e);
-            return false;
+            throw new BaseException(ResponseCode.TOKEN_VALIDATION_FAILURE);
         } catch (Exception e) {
-            log.error("Exception", e);
-            return false;
+            throw new BaseException(ResponseCode.INTERNAL_SERVER_ERROR);
         }
     }
 }
