@@ -1,18 +1,13 @@
 package com.gstagram.gstagram.auth.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
 
 @Getter
+@AllArgsConstructor
 public class RefreshToken {
-    @Id
+    @Id //redis에서 key값으로 사용하기 위해 id로 지정
     private String refreshToken;
-    private final String userId;
-
-    public RefreshToken(String refreshToken, String userId) {
-        this.refreshToken = refreshToken;
-        this.userId = userId;
-    }
-
+    private String userId;
 }

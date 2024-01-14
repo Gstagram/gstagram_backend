@@ -27,6 +27,7 @@ public class JwtTokenProvider {
     //내부 암호화 키
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
+    //AccessToken 생성 (user의 pk를 subject로 저장)
     public String createAccessToken(String userPK) {
         Claims claims = Jwts.claims().setSubject(userPK);
         Date now = new Date();
@@ -40,8 +41,9 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String createRefreshToken(String userPK) {
-        Claims claims = Jwts.claims().setSubject(userPK);
+    //RefreshToken 생성 (AccessToken이 만료되었을 떄, 이를 이용해서 AccessToken을 재발급)
+    public String createRefreshToken(Authentication authentication) {
+        Claims claims = Jwts.claims().setSubject(authentication.getName());
         Date now = new Date();
         //1주일
         long refreshTokenValidTime = 7 * 24 * 60 * 60 * 1000L;
@@ -53,16 +55,20 @@ public class JwtTokenProvider {
                 .compact();
 
         redisTemplate.opsForValue().set(
-                userPK,
+                authentication.getName(),
                 refreshToken,
                 refreshTokenValidTime,
                 TimeUnit.SECONDS
-        );
+        ); //Redis에 RefreshToken 저장
         return refreshToken;
     }
 
+    //여기서 Token은 AccessToken
+    //받은 AccessToken에서 user pk를 추출하고, 이를 통해서 UserDetail 객체를 만든다.
+    //이떄 UserDetails는 User이 UserDetail을 상속받고 있으므로 UserDetail 객체를 반환한다.
+    //만든 UserDetail 객체를 통해서 Authentication 객체를 만들어서 반환한다.
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(String.valueOf(this.getUserPk(token)));
+        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
@@ -70,6 +76,7 @@ public class JwtTokenProvider {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
     }
 
+    //Header에서 Token을 가져온다.
     public String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if(bearerToken != null && bearerToken.startsWith("Bearer ")) {
