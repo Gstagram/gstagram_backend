@@ -5,4 +5,4 @@ resources:
 images:
 - name: synoti21/gstagram_backend
   newName: synoti21/gstagram_backend
-  newTag: 4962fe2d
+  newTag: 375b8d4d
