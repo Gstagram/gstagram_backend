@@ -13,6 +13,7 @@ public enum ResponseCode {
 
     // 401 Unauthorized
     TOKEN_VALIDATION_FAILURE(HttpStatus.UNAUTHORIZED, false, "토큰 검증 실패"),
+    REFRESH_TOKEN_VALIDATION_FAILURE(HttpStatus.UNAUTHORIZED, false, "Refresg 토큰 검증 실패"),
     USER_LOGIN_FAILURE(HttpStatus.UNAUTHORIZED, false, "로그인 실패"),
 
     // 403 Forbidden
