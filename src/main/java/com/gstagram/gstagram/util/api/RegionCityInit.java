@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -34,7 +36,7 @@ public class RegionCityInit {
      * api로 받아온 정보를 처리하여 DB에 저장한다
      * 그냥 app 실행할 때 한번 실행된다고 생각하면 된다
      */
-    @PostConstruct
+    @EventListener(ApplicationReadyEvent.class)
     public void RegionInit() throws IOException {
 
         // db에 city, region 정보 있으면 처리x
