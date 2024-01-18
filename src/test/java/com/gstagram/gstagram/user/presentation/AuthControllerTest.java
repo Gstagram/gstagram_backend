@@ -3,12 +3,14 @@ package com.gstagram.gstagram.user.presentation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gstagram.gstagram.auth.application.AuthService;
+import com.gstagram.gstagram.auth.application.AuthServiceImpl;
 import com.gstagram.gstagram.auth.dto.reqeust.LoginReqDto;
 import com.gstagram.gstagram.auth.dto.reqeust.SignUpDto;
 import com.gstagram.gstagram.auth.dto.response.ResponseTokenDto;
 import com.gstagram.gstagram.common.api.ApiResponse;
 import com.gstagram.gstagram.common.api.ResponseCode;
 import com.gstagram.gstagram.common.exception.UserException;
+import com.gstagram.gstagram.config.TestConfig;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.assertj.core.api.Assertions;
@@ -22,8 +24,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.ResultActions;
@@ -39,9 +44,8 @@ import static org.mockito.junit.jupiter.MockitoExtension.*;
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(controllers = AuthController.class)
+@Import(TestConfig.class)
 public class AuthControllerTest {
-    @InjectMocks
-    private AuthController authController;
 
     @Autowired
     private MockMvc mockMvc;
@@ -49,14 +53,14 @@ public class AuthControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    @Mock
-    private AuthService authService;
+    @MockBean
+    private AuthServiceImpl authService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     public void init(){
-        mockMvc = MockMvcBuilders.standaloneSetup(authController).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
     @Test
     public void mockMvcIsNotNull(){
@@ -64,6 +68,7 @@ public class AuthControllerTest {
     }
 
     @Test
+    @WithMockUser("test")
     public void register_success() throws Exception {
         //given
         ApiResponse<Void> expectedResponse = ApiResponse.success(null, ResponseCode.USER_CREATE_SUCCESS.getMessage());
@@ -72,7 +77,7 @@ public class AuthControllerTest {
                 .username("test")
                 .password("test")
                 .nickname("test")
-                .isUserAuthorized(true)
+                .userAuthroized(true)
                 .profileS3ImageUrl("test")
                 .build();
 
@@ -80,8 +85,8 @@ public class AuthControllerTest {
         String json = objectMapper.writeValueAsString(expectedResponse);
 
         //when & then
-        final ResultActions resultActions = mockMvc.perform(
-                MockMvcRequestBuilders.post("/auth/register")
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/auth/signup")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
                         .accept(MediaType.APPLICATION_JSON))
@@ -100,7 +105,7 @@ public class AuthControllerTest {
                 .username("")
                 .password("")
                 .nickname("")
-                .isUserAuthorized(true)
+                .userAuthroized(true)
                 .profileS3ImageUrl("")
                 .build();
         when(authService.signUp(any(SignUpDto.class))).thenReturn(true);
@@ -108,7 +113,7 @@ public class AuthControllerTest {
 
         //when & then
         final ResultActions resultActions = mockMvc.perform(
-                        MockMvcRequestBuilders.post("/auth/register")
+                        MockMvcRequestBuilders.post("/api/auth/signup")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(json)
                                 .accept(MediaType.APPLICATION_JSON))
@@ -119,6 +124,7 @@ public class AuthControllerTest {
     }
 
     @Test
+    @WithMockUser("test")
     public void login_success() throws Exception {
         //given
         ApiResponse<Void> expectedResponse = ApiResponse.success(null, ResponseCode.USER_LOGIN_SUCCESS.getMessage());
@@ -135,7 +141,7 @@ public class AuthControllerTest {
 
         //when & then
         final ResultActions resultActions = mockMvc.perform(
-                        MockMvcRequestBuilders.post("/auth/login")
+                        MockMvcRequestBuilders.post("/api/auth/login")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(json)
                                 .accept(MediaType.APPLICATION_JSON))
@@ -163,7 +169,7 @@ public class AuthControllerTest {
 
         //when & then
         final ResultActions resultActions = mockMvc.perform(
-                        MockMvcRequestBuilders.post("/auth/login")
+                        MockMvcRequestBuilders.post("/api/auth/login")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(json)
                                 .accept(MediaType.APPLICATION_JSON))

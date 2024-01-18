@@ -25,5 +25,5 @@ public class SignUpDto {
     private String profileS3ImageUrl;
 
     @NotNull(message = "유저 인증 여부를 입력해주세요.")
-    private boolean isUserAuthorized;
+    private boolean userAuthroized;
 }

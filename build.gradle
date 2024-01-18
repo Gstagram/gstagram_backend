@@ -53,6 +53,8 @@ dependencies {
     // test용 db
     // test에서 쓰기 위해서 tempImpl
     testImplementation 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 
     // querydsl dependency
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
