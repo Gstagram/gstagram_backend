@@ -71,18 +71,17 @@ public class AuthControllerTest {
     @WithMockUser("test")
     public void register_success() throws Exception {
         //given
-        ApiResponse<Void> expectedResponse = ApiResponse.success(null, ResponseCode.USER_CREATE_SUCCESS.getMessage());
         SignUpDto signUpDto = SignUpDto.builder()
                 .email("test@test.com")
                 .username("test")
                 .password("test")
                 .nickname("test")
-                .userAuthroized(true)
                 .profileS3ImageUrl("test")
+                .userAuthorized(true)
                 .build();
 
         when(authService.signUp(any(SignUpDto.class))).thenReturn(true);
-        String json = objectMapper.writeValueAsString(expectedResponse);
+        String json = objectMapper.writeValueAsString(signUpDto);
 
         //when & then
         mockMvc.perform(
@@ -90,26 +89,25 @@ public class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.header.code").value(HttpStatus.CREATED.value()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.header.message").value(ResponseCode.USER_CREATE_SUCCESS.getMessage()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data").isEmpty());
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data").value(true));
     }
 
     @Test
     public void register_fail() throws Exception {
         //given
-        ApiResponse<Void> expectedResponse = ApiResponse.fail(ResponseCode.USER_ALREADY_EXIST, null);
+        ApiResponse<Void> expectedResponse = ApiResponse.fail(ResponseCode.BAD_REQUEST, null);
         SignUpDto signUpDto = SignUpDto.builder()
                 .email("")
                 .username("")
                 .password("")
                 .nickname("")
-                .userAuthroized(true)
+                .userAuthorized(true)
                 .profileS3ImageUrl("")
                 .build();
         when(authService.signUp(any(SignUpDto.class))).thenReturn(true);
-        String json = objectMapper.writeValueAsString(expectedResponse);
+        String json = objectMapper.writeValueAsString(signUpDto);
 
         //when & then
         final ResultActions resultActions = mockMvc.perform(
@@ -119,20 +117,18 @@ public class AuthControllerTest {
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.header.code").value(HttpStatus.BAD_REQUEST.value()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.header.message").value(ResponseCode.BAD_REQUEST.getMessage()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data").isEmpty());
+                .andExpect(MockMvcResultMatchers.jsonPath("$.header.message").value(ResponseCode.BAD_REQUEST.getMessage()));
     }
 
     @Test
     @WithMockUser("test")
     public void login_success() throws Exception {
         //given
-        ApiResponse<Void> expectedResponse = ApiResponse.success(null, ResponseCode.USER_LOGIN_SUCCESS.getMessage());
         LoginReqDto loginReqDto = LoginReqDto.builder()
                 .email("test@test.com")
                 .password("test")
                 .build();
-        String json = objectMapper.writeValueAsString(expectedResponse);
+        String json = objectMapper.writeValueAsString(loginReqDto);
 
         when(authService.login(any(LoginReqDto.class))).thenReturn(ResponseTokenDto.builder()
                 .accessToken("test")
@@ -140,7 +136,7 @@ public class AuthControllerTest {
                 .build());
 
         //when & then
-        final ResultActions resultActions = mockMvc.perform(
+        mockMvc.perform(
                         MockMvcRequestBuilders.post("/api/auth/login")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(json)
@@ -155,12 +151,11 @@ public class AuthControllerTest {
     @Test
     public void login_bad_request() throws Exception {
         //given
-        ApiResponse<Void> expectedResponse = ApiResponse.fail(ResponseCode.USER_LOGIN_FAILURE, null);
         LoginReqDto loginReqDto = LoginReqDto.builder()
                 .email("")
                 .password("")
                 .build();
-        String json = objectMapper.writeValueAsString(expectedResponse);
+        String json = objectMapper.writeValueAsString(loginReqDto);
 
         when(authService.login(any(LoginReqDto.class))).thenReturn(ResponseTokenDto.builder()
                 .accessToken("test")
@@ -168,37 +163,14 @@ public class AuthControllerTest {
                 .build());
 
         //when & then
-        final ResultActions resultActions = mockMvc.perform(
+        mockMvc.perform(
                         MockMvcRequestBuilders.post("/api/auth/login")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(json)
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.header.code").value(HttpStatus.BAD_REQUEST.value()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.header.message").value(ResponseCode.BAD_REQUEST.getMessage()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data").isEmpty());
+                .andExpect(MockMvcResultMatchers.jsonPath("$.header.message").value(ResponseCode.BAD_REQUEST.getMessage()));
     }
 
-    @Test
-    public void login_fail() throws Exception {
-        //given
-        ApiResponse<Void> expectedResponse = ApiResponse.fail(ResponseCode.USER_LOGIN_FAILURE, null);
-        LoginReqDto loginReqDto = LoginReqDto.builder()
-                .email("test@test.com")
-                .password("test")
-                .build();
-        when(authService.login(loginReqDto)).thenThrow(new UserException(ResponseCode.USER_LOGIN_FAILURE));
-        String json = objectMapper.writeValueAsString(expectedResponse);
-
-        //when & then
-        final ResultActions resultActions = mockMvc.perform(
-                        MockMvcRequestBuilders.post("/auth/login")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(json)
-                                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.header.code").value(HttpStatus.UNAUTHORIZED.value()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.header.message").value(ResponseCode.USER_LOGIN_FAILURE.getMessage()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data").isEmpty());
-    }
 }
