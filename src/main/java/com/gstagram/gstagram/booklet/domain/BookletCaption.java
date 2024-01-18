@@ -1,12 +1,16 @@
 package com.gstagram.gstagram.booklet.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "booklet_caption")
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
 public class BookletCaption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +26,19 @@ public class BookletCaption {
     @Column(name = "caption", nullable = false)
     private String caption;
 
-    @Column(name = "sequence", nullable = false)
-    private int sequence;
+    @Column(name = "sequnce", nullable = false)
+    private Integer sequence;
+
+
+    public void changeImg(String s3Url) {
+        this.s3Url = s3Url;
+    }
+
+    public void changeCaption(String caption) {
+        this.caption = caption;
+    }
+
+
+
 
 }
