@@ -173,4 +173,28 @@ public class AuthControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.header.message").value(ResponseCode.BAD_REQUEST.getMessage()));
     }
 
+    @Test
+    public void reissue_Token() throws Exception {
+        //given
+        String refreshToken = "test";
+        ResponseTokenDto refreshedResponseTokenDto = ResponseTokenDto.builder()
+                .accessToken("newAccess")
+                .refreshToken("newRefresh")
+                .build();
+
+        when(authService.reissueToken(any(String.class))).thenReturn(refreshedResponseTokenDto);
+
+        //when & then
+        mockMvc.perform(
+                        MockMvcRequestBuilders.post("/api/auth/reissue")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(refreshToken)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.header.code").value(HttpStatus.OK.value()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.header.message").value(ResponseCode.TOKEN_REISSUE_SUCCESS.getMessage()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.accessToken").value("newAccess"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.refreshToken").value("newRefresh"));
+    }
+
 }
