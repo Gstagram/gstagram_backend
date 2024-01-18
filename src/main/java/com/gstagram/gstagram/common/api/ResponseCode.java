@@ -36,6 +36,8 @@ public enum ResponseCode {
     USER_LOGIN_SUCCESS(HttpStatus.OK, true, "사용자 로그인 성공"),
     USER_DELETE_SUCCESS(HttpStatus.OK, true, "사용자 삭제 성공"),
 
+    TOKEN_REISSUE_SUCCESS(HttpStatus.OK, true, "토큰 재발급 성공"),
+
     // 201 Created
     USER_CREATE_SUCCESS(HttpStatus.CREATED, true, "사용자 생성 성공");
 
