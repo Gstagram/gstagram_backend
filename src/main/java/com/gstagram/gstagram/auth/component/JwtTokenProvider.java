@@ -30,8 +30,8 @@ public class JwtTokenProvider {
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
     //AccessToken 생성 (user의 pk를 subject로 저장)
-    public String createAccessToken(String userPK) {
-        Claims claims = Jwts.claims().setSubject(userPK);
+    public String createAccessToken(Authentication authentication) {
+        Claims claims = Jwts.claims().setSubject(authentication.getName());
         Date now = new Date();
         //1시간
         long accessTokenValidTime = 60 * 60 * 1000L;
