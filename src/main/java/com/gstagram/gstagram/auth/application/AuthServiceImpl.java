@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -31,6 +32,7 @@ public class AuthServiceImpl implements AuthService{
     private final RedisTemplate<String, String> redisTemplate;
 
     @Override
+    @Transactional
     public boolean signUp(SignUpDto signUpDto) {
         validateDuplicateUser(signUpDto.getEmail());
 

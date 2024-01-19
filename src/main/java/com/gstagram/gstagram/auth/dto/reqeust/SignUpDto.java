@@ -15,7 +15,7 @@ public class SignUpDto {
     private String email;
 
     @NotNull
-    @NotBlank(message = "비밀번호를 입력해주세요.")
+    @NotBlank(message = "이름을 입력해주세요.")
     private String username;
 
     @NotNull(message = "비밀번호를 입력해주세요.")
