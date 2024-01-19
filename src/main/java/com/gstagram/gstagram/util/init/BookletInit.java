@@ -14,6 +14,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
@@ -27,6 +28,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Slf4j
+@Profile("dev")
 public class BookletInit {
 
     private final BookletService bookletService;
@@ -37,11 +39,12 @@ public class BookletInit {
 
     /**
      * booklet 설정하기
-     * */
+     */
     @EventListener(ApplicationReadyEvent.class)
     @Order(2)
+
     public void bookletInit() {
-        if (bookletCatptionRepository.count() > 0 ){
+        if (bookletCatptionRepository.count() > 0) {
             return;
         }
 

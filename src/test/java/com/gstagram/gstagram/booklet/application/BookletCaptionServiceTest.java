@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -25,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Transactional
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // junit5 에서 beforeAll을 non-static하게 하기 위해서..
 @Slf4j
+@ActiveProfiles("default") //booklet init 비활성화시키기 위해서
 public class BookletCaptionServiceTest {
 
 
