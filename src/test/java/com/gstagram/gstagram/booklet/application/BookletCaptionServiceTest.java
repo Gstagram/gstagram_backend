@@ -48,7 +48,6 @@ public class BookletCaptionServiceTest {
     public void beforeAll() {
         region = regionRepository.findByRegionName("경상북도").get();
         booklet = bookletService.saveBooklet(region.getId());
-        log.info(booklet.toString());
 
     }
 
