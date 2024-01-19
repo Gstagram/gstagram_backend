@@ -57,4 +57,11 @@ public class BookletService {
     }
 
 
+    public Booklet findBookletByRegionId(Long regionId) {
+
+        return bookletRepository.findBookletByRegionId(regionId)
+                .orElseThrow(() -> new BaseException(ResponseCode.REGION_NOT_FOUND));
+
+    }
+
 }
