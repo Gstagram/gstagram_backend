@@ -1,16 +1,16 @@
-package com.gstagram.gstagram.util.api;
+package com.gstagram.gstagram.util.init;
 
 import com.gstagram.gstagram.city.domain.City;
 import com.gstagram.gstagram.city.repository.CityRepository;
 import com.gstagram.gstagram.region.domain.Region;
 import com.gstagram.gstagram.region.repository.RegionRepository;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -37,6 +37,7 @@ public class RegionCityInit {
      * 그냥 app 실행할 때 한번 실행된다고 생각하면 된다
      */
     @EventListener(ApplicationReadyEvent.class)
+    @Order(1)
     public void RegionInit() throws IOException {
 
         // db에 city, region 정보 있으면 처리x
@@ -50,8 +51,6 @@ public class RegionCityInit {
         JSONObject json = readJsonFromUrl(url);
         JSONArray regcodes = json.getJSONArray("regcodes");
         jsonToDB(regcodes);
-
-
 
 
         //city를 db에 저장

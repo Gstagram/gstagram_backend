@@ -39,6 +39,7 @@ public class BookletInit {
      * booklet 설정하기
      * */
     @EventListener(ApplicationReadyEvent.class)
+    @Order(2)
     public void bookletInit() {
         if (bookletCatptionRepository.count() > 0 ){
             return;
