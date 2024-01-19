@@ -3,6 +3,7 @@ package com.gstagram.gstagram.booklet.application.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * Controller에서 service 코드를 쓰기 위한 DTO
@@ -11,6 +12,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class BookletCaptionRequestDTO {
     /***
