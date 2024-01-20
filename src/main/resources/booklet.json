@@ -1,0 +1,257 @@
+[
+  {
+    "regionName": "서울특별시",
+    "bookletCaptions": [
+      {
+        "caption": "고궁과 현대 건축이 공존하는, 한국의 역사적이면서도 현대적인 수도.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%84%9C%EC%9A%B81.jpeg"
+      },
+      {
+        "caption": "역동적인 문화와 예술이 넘치는 글로벌 도시, 한국의 경제와 정치의 중심지.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%84%9C%EC%9A%B82.jpeg"
+      },
+      {
+        "caption": "전통 시장부터 세계적인 쇼핑 명소까지, 다채로운 경험이 있는 생동감 넘치는 메트로폴리스.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%84%9C%EC%9A%B83.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "부산광역시",
+    "bookletCaptions": [
+      {
+        "caption": "활기찬 해양 도시, 아름다운 해변과 현대적인 스카이라인이 조화를 이루는 곳.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EB%B6%80%EC%82%B01.jpg"
+      },
+      {
+        "caption": "부산 국제 영화제의 고향, 문화와 예술이 번성하는 한국의 창조적 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EB%B6%80%EC%82%B02.jpg"
+      },
+      {
+        "caption": "신선한 해산물과 전통 시장이 매력적인, 한국 남부의 관문 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EB%B6%80%EC%83%822.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "대구광역시",
+    "bookletCaptions": [
+      {
+        "caption": "전통과 현대가 공존하는 도시, 한국의 패션 산업과 현대 문화의 중심지.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EB%8C%80%EA%B5%AC1.jpg"
+      },
+      {
+        "caption": "맛과 멋이 넘치는 길거리 음식과 다양한 축제로 유명한 활기찬 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EB%8C%80%EA%B5%AC2.jpg"
+      },
+      {
+        "caption": "아름다운 산과 고즈넉한 사찰이 어우러진, 한국의 역사적 중심지 중 하나.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EB%8C%80%EA%B5%AC3.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "인천광역시",
+    "bookletCaptions": [
+      {
+        "caption": "한국의 주요 국제 관문이자 현대적인 항구 도시, 다양한 문화가 공존하는 글로벌 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%9D%B8%EC%B2%9C1.jpg"
+      },
+      {
+        "caption": "아름다운 섬과 해안선을 자랑하는, 역사적 유적과 자연이 어우러진 해양 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%9D%B8%EC%B2%9C2.jpg"
+      },
+      {
+        "caption": "차이나타운과 송도 국제도시와 같은 다채로운 관광 명소를 갖춘 독특한 매력의 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%9D%B8%EC%B2%9C3.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "광주광역시",
+    "bookletCaptions": [
+      {
+        "caption": "한국 현대사의 중심지, 예술과 민주주의 정신이 깃든 문화 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B4%91%EC%A3%BC1.jpg"
+      },
+      {
+        "caption": "전통과 현대미술이 조화를 이루는, 다양한 미술관과 축제가 많은 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B4%91%EC%A3%BC2.jpg"
+      },
+      {
+        "caption": "맛있는 음식과 따뜻한 인심이 넘치는, 남도 문화의 중심지.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B4%91%EC%A3%BC3.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "대전광역시",
+    "bookletCaptions": [
+      {
+        "caption": "과학과 기술의 중심지, 대한민국 연구개발의 심장부에 위치한 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EB%8C%80%EC%A0%841.jpg"
+      },
+      {
+        "caption": "자연과 도시가 조화롭게 어우러진, 산과 강이 아름다운 현대적 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EB%8C%80%EC%A0%842.jpg"
+      },
+      {
+        "caption": "다양한 과학 박물관과 교육 시설이 있는, 가족 친화적이고 교육적인 도시.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EB%8C%80%EC%A0%843.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "충청북도",
+    "bookletCaptions": [
+      {
+        "caption": "자연과 과학이 조화를 이루는 충청북도, 청정 자연 속에 현대적 과학 도시들이 자리 잡고 있음.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%B6%A9%EB%B6%811.jpg"
+      },
+      {
+        "caption": "속리산과 충주호 같은 아름다운 자연 경관과 함께, 풍부한 문화 유산이 있는 지역.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%B6%A9%EA%B5%BD%E3%84%B12.jpeg"
+      },
+      {
+        "caption": "전통 농업과 첨단 산업이 어우러진 독특한 경제 구조를 가진 도.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%B6%A9%EB%B6%813.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "충청남도",
+    "bookletCaptions": [
+      {
+        "caption": "농업과 해양 자원이 풍부한 충청남도, 여러 역사적 유적지와 아름다운 해안선이 특징.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%B6%A9%EB%82%A81.jpg"
+      },
+      {
+        "caption": "배, 복숭아, 고추 등 다양한 농산물로 유명하며, 전통적인 마을과 현대적인 도시가 공존.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%B6%A9%EB%82%A82.jpg"
+      },
+      {
+        "caption": "보령 머드 축제와 같은 유명한 지역 축제가 매년 열리는 문화적으로 활발한 지역.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%B6%A9%EB%82%A83.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "전라북도",
+    "bookletCaptions": [
+      {
+        "caption": "한국 문화와 예술의 중심지, 전주 한옥 마을과 전통 음식으로 유명한 도.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%A0%84%EB%B6%813.jpg"
+      },
+      {
+        "caption": "무주 구천동과 같은 아름다운 자연 경관과, 전라북도의 풍부한 역사적 유적이 조화를 이룸.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%A0%84%EB%B6%812.jpg"
+      },
+      {
+        "caption": "농업과 전통문화가 중심인 생활 방식으로, 전통적인 한국 문화를 경험할 수 있는 곳.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%A0%84%EB%B6%814.jpeg"
+      }
+    ]
+  },
+  {
+    "regionName": "전라남도",
+    "bookletCaptions": [
+      {
+        "caption": "아름다운 섬과 청정 바다가 특징인 전라남도, 남해안의 빼어난 자연 경관이 매력적.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%A0%84%EB%82%A81.jpg"
+      },
+      {
+        "caption": "한국 전통 어촌 문화와 다양한 해산물 요리로 유명한 지역.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%A0%84%EB%82%A82.jpg"
+      },
+      {
+        "caption": "순천만, 여수 엑스포와 같은 관광 명소가 있는, 관광과 자연이 어우러진 도시",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%A0%84%EB%82%A83.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "경기도",
+    "bookletCaptions": [
+      {
+        "caption": "서울의 위성도시들과 함께 번성하는 경기도, 현대적인 도시 생활과 자연이 공존.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B2%BD%EA%B8%B0%EB%8F%841.jpg"
+      },
+      {
+        "caption": "다양한 문화 시설, 교육 기관, 산업단지가 위치한 대한민국의 경제 중심지 중 하나.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B2%BD%EA%B8%B02.jpg"
+      },
+      {
+        "caption": "북한산 국립공원과 같은 아름다운 자연경관과 전통적인 한옥 마을이 있는 다양한 문화의 공간.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B2%BD%EA%B8%B03.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "강원특별자치도",
+    "bookletCaptions": [
+      {
+        "caption": "설악산, 오대산 등 뛰어난 자연 경관과 겨울 스포츠의 중심지.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B0%95%EC%9B%901.jpg"
+      },
+      {
+        "caption": "한국 전쟁의 역사가 살아 숨 쉬는 DMZ와 평화의 상징이 되는 지역.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B0%95%EC%9B%902.jpg"
+      },
+      {
+        "caption": "바다와 산이 만나는 아름다운 풍경과 전통적인 해안 마을의 삶이 공존하는 곳.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B0%95%EC%9B%903.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "제주특별자치도",
+    "bookletCaptions": [
+      {
+        "caption": "한라산과 청정 자연, 독특한 문화가 어우러진 대한민국의 대표적인 관광지.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%A0%9C%EC%A3%BC1.jpeg"
+      },
+      {
+        "caption": "아름다운 해변과 제주 특유의 돌담, 오름이 특징인 자연의 보고.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%A0%9C%EC%A3%BC2.jpg"
+      },
+      {
+        "caption": "제주 전통 문화와 음식, 그리고 현대사의 기록이 있는 곳.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%A0%9C%EC%A3%BC3.jpg"
+      }
+    ]
+  },
+  {
+    "regionName": "경상북도",
+    "bookletCaptions": [
+      {
+        "caption": "한국 전통 문화와 역사가 살아 숨 쉬는 곳, 신라 천년의 고도 경주가 위치한 도.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B2%BD%EB%B6%811.jpg"
+      },
+      {
+        "caption": "태백산맥의 장엄한 산세와 청정한 자연이 매력적인 지역.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B2%BD%EB%B6%812.jpg"
+      },
+      {
+        "caption": "안동 하회마을과 같은 전통적인 한국의 마을과 문화유산이 풍부한 곳.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B2%BD%EB%B6%813.jpeg"
+      }
+    ]
+  },
+  {
+    "regionName": "경상남도",
+    "bookletCaptions": [
+      {
+        "caption": "다도해 해상 국립공원과 아름다운 해안선이 특징인 경상남도, 자연의 아름다움이 돋보이는 지역.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B2%BD%EB%82%A85.jpg"
+      },
+      {
+        "caption": "진주, 통영, 거제 등 역사와 문화가 어우러진 도시들로 구성된 지역.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B2%BD%EB%82%A84.jpg"
+      },
+      {
+        "caption": "풍부한 해산물과 남해안의 따뜻한 기후가 특징인, 해양과 어촌 문화가 풍부한 곳.",
+        "imageUrl": "https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EA%B2%BD%EB%82%A83.jpg"
+      }
+    ]
+  }
+]

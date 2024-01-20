@@ -22,6 +22,8 @@ public enum ResponseCode {
     // 404 Not Found
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, false, "사용자를 찾을 수 없습니다."),
     CHECK_NOT_FOUND(HttpStatus.NOT_FOUND, false, "체크를 찾을 수 없습니다."),
+    REGION_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 지역을 찾을 수 없습니다."),
+    BOOKLET_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 책자를 찾을 수 없습니다."),
 
     // 409 Conflict
     USER_ALREADY_EXIST(HttpStatus.CONFLICT, false, "이미 가입한 사용자입니다."),
@@ -35,6 +37,8 @@ public enum ResponseCode {
     USER_SEARCH_SUCCESS(HttpStatus.OK, true, "사용자 검색 성공"),
     USER_LOGIN_SUCCESS(HttpStatus.OK, true, "사용자 로그인 성공"),
     USER_DELETE_SUCCESS(HttpStatus.OK, true, "사용자 삭제 성공"),
+    BOOKLET_SEARCH_SUCCESS(HttpStatus.OK, true, "책자 검색 성공"),
+    BOOKLET_UPDATE_SUCCESS(HttpStatus.OK, true, "책자 수정 성공"),
 
     TOKEN_REISSUE_SUCCESS(HttpStatus.OK, true, "토큰 재발급 성공"),
 

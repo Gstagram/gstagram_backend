@@ -1,7 +1,10 @@
 package com.gstagram.gstagram.common.api;
 
+import com.gstagram.gstagram.booklet.controller.dto.response.BookletResponseDTO;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
@@ -24,4 +27,6 @@ public class ApiResponse<T> {
     public static <T> ApiResponse<T> fail(ResponseCode responseCode, T data) {
         return new ApiResponse<T>(new ApiHeader(responseCode.getHttpStatusCode(), responseCode.getMessage()), data, responseCode.getMessage());
     }
+
+
 }
