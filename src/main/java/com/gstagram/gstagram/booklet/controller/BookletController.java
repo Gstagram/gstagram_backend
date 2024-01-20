@@ -36,8 +36,8 @@ public class BookletController {
     public ApiResponse<List<BookletResponseDTO>> findBookletByRegionName(@PathVariable String regionName) {
         Region region = regionService.findByName(regionName);
         Booklet booklet = bookletService.findBookletByRegionId(region.getId());
-        List<BookletResponseDTO> bookletResponseDTOS = BookletResponseDTO.BookletToDTO(booklet);
-        return ApiResponse.success(bookletResponseDTOS, ResponseCode.BOOKLET_SEARCH_SUCCESS.getMessage());
+        List<BookletResponseDTO> bookletResponseDTOS = BookletResponseDTO.from(booklet);
+        return ApiResponse.success(ResponseCode.BOOKLET_SEARCH_SUCCESS, bookletResponseDTOS);
     }
 
 
@@ -55,6 +55,6 @@ public class BookletController {
                 .caption(bookletCaption.getCaption())
                 .imgURL(bookletCaption.getS3Url())
                 .sequence(bookletCaption.getSequence()).build();
-        return ApiResponse.success(responseDTO, ResponseCode.BOOKLET_SEARCH_SUCCESS.getMessage());
+        return ApiResponse.success(ResponseCode.BOOKLET_SEARCH_SUCCESS, responseDTO);
     }
 }

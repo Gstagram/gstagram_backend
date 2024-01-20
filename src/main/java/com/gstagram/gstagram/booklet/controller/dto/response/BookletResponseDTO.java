@@ -18,9 +18,8 @@ public class BookletResponseDTO {
     String imgURL;
     Integer sequence;
 
-    public static List<BookletResponseDTO> BookletToDTO(Booklet booklet) {
+    public static List<BookletResponseDTO> from(Booklet booklet) {
         List<BookletCaption> bookletCaptions = booklet.getBookletCaptions();
-        List<BookletResponseDTO> result = new ArrayList<>();
         return bookletCaptions.stream().map(bookletCaption -> {
             return BookletResponseDTO.builder()
                     .regionId(booklet.getRegion().getId())
