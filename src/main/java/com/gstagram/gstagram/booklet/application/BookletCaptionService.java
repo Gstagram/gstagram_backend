@@ -6,7 +6,7 @@ import com.gstagram.gstagram.booklet.domain.BookletCaption;
 import com.gstagram.gstagram.booklet.repository.booklet.BookletRepository;
 import com.gstagram.gstagram.booklet.repository.bookletcaption.BookletCatptionRepository;
 import com.gstagram.gstagram.common.api.ResponseCode;
-import com.gstagram.gstagram.common.exception.BaseException;
+import com.gstagram.gstagram.common.exception.BookletException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class BookletCaptionService {
     @Transactional
     public BookletCaption saveBookletCaption(Long bookletId, BookletCaptionRequestDTO request) {
 
-        Booklet booklet = bookletRepository.findById(bookletId).orElseThrow(() -> new BaseException(ResponseCode.BOOKLET_NOT_FOUND));
+        Booklet booklet = bookletRepository.findById(bookletId).orElseThrow(() -> new BookletException(ResponseCode.BOOKLET_NOT_FOUND));
 
         BookletCaption bookletCaption = BookletCaption.builder()
                 .booklet(booklet)
@@ -61,7 +61,7 @@ public class BookletCaptionService {
      */
     public BookletCaption findBookletCaption(Long bookletCaptionId) {
 
-        return bookletCatptionRepository.findById(bookletCaptionId).orElseThrow(() -> new BaseException(ResponseCode.BOOKLET_NOT_FOUND));
+        return bookletCatptionRepository.findById(bookletCaptionId).orElseThrow(() -> new BookletException(ResponseCode.BOOKLET_NOT_FOUND));
     }
 
 
@@ -76,7 +76,7 @@ public class BookletCaptionService {
     public BookletCaption changeBookletCaption(Long bookletCaptionId, BookletCaptionRequestDTO request) {
 
         BookletCaption bookletCaption = bookletCatptionRepository.findById(bookletCaptionId)
-                .orElseThrow(() -> new BaseException(ResponseCode.BOOKLET_NOT_FOUND));
+                .orElseThrow(() -> new BookletException(ResponseCode.BOOKLET_NOT_FOUND));
         // null + empty인 경우를 check해준다 --> spring에서 제공해주는 기능
         if (StringUtils.hasText(request.getCaption())) {
             bookletCaption.changeCaption(request.getCaption());
@@ -97,7 +97,7 @@ public class BookletCaptionService {
     @Transactional
     public void deleteBookletCation(Long bookletCaptionId) {
         BookletCaption bookletCaption = bookletCatptionRepository.findById(bookletCaptionId)
-                .orElseThrow(() -> new BaseException(ResponseCode.BOOKLET_NOT_FOUND));
+                .orElseThrow(() -> new BookletException(ResponseCode.BOOKLET_NOT_FOUND));
 
         Booklet booklet = bookletCaption.getBooklet();
 

@@ -3,7 +3,8 @@ package com.gstagram.gstagram.booklet.application;
 import com.gstagram.gstagram.booklet.domain.Booklet;
 import com.gstagram.gstagram.booklet.repository.booklet.BookletRepository;
 import com.gstagram.gstagram.common.api.ResponseCode;
-import com.gstagram.gstagram.common.exception.BaseException;
+import com.gstagram.gstagram.common.exception.BookletException;
+import com.gstagram.gstagram.common.exception.RegionException;
 import com.gstagram.gstagram.region.domain.Region;
 import com.gstagram.gstagram.region.repository.RegionRepository;
 import lombok.AccessLevel;
@@ -34,7 +35,7 @@ public class BookletService {
     public Booklet saveBooklet(Long regionId) {
 
         Region region = regionRepository.findById(regionId)
-                .orElseThrow(() -> new BaseException(ResponseCode.REGION_NOT_FOUND));
+                .orElseThrow(() -> new RegionException(ResponseCode.REGION_NOT_FOUND));
 
         // 지역 당 하나의 booklet이 존재
         // 중복 확인 -> 저장 로직 수행x
@@ -52,7 +53,7 @@ public class BookletService {
     public Booklet findBooklet(Long bookletId) {
 
         return bookletRepository.findById(bookletId)
-                .orElseThrow(() -> new BaseException(ResponseCode.BOOKLET_NOT_FOUND));
+                .orElseThrow(() -> new BookletException(ResponseCode.BOOKLET_NOT_FOUND));
 
     }
 
@@ -60,7 +61,7 @@ public class BookletService {
     public Booklet findBookletByRegionId(Long regionId) {
 
         return bookletRepository.findBookletByRegionId(regionId)
-                .orElseThrow(() -> new BaseException(ResponseCode.REGION_NOT_FOUND));
+                .orElseThrow(() -> new BookletException(ResponseCode.REGION_NOT_FOUND));
 
     }
 
