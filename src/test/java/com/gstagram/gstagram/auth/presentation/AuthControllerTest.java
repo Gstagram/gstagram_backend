@@ -1,4 +1,4 @@
-package com.gstagram.gstagram.user.presentation;
+package com.gstagram.gstagram.auth.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gstagram.gstagram.auth.presentation.AuthController;

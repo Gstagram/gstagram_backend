@@ -1,4 +1,4 @@
-package com.gstagram.gstagram.user.application;
+package com.gstagram.gstagram.auth.application;
 
 /*import com.gstagram.gstagram.auth.application.AuthService;
 import com.gstagram.gstagram.auth.dto.reqeust.LoginReqDto;
