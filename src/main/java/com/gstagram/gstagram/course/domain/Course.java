@@ -4,13 +4,13 @@ import com.gstagram.gstagram.city.domain.City;
 import com.gstagram.gstagram.region.domain.Region;
 import com.gstagram.gstagram.user.domain.User;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,4 +33,14 @@ public class Course {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "city_id")
     private City city;
+
+    private String thumbNailUrl;
+
+    public void changeCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public void changeDescription(String description) {
+        this.description = description;
+    }
 }
