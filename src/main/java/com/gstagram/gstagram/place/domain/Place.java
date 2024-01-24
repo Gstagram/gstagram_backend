@@ -2,13 +2,16 @@ package com.gstagram.gstagram.place.domain;
 
 import com.gstagram.gstagram.course.domain.Course;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,15 +24,38 @@ public class Place {
     private String description;
 
     @Column(nullable = false)
-    private double latitude;
+    private Double latitude;
 
     @Column(nullable = false)
-    private double longitude;
+    private Double longitude;
 
     @Column(nullable = false)
-    private int sequence;
+    private Integer sequence;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "course_id")
     private Course course;
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlaceImage> placeImageList = new ArrayList<>();
+
+    public void changePlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    public void changeDescription(String description) {
+        this.description = description;
+    }
+
+    public void changeLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void changeLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void changeSequence(Integer sequence) {
+        this.sequence = sequence;
+    }
 }
