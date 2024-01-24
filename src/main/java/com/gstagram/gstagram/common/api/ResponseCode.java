@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 public enum ResponseCode {
     // 400 Bad Request
     BAD_REQUEST(HttpStatus.BAD_REQUEST, false, "잘못된 요청입니다."),
+    REGION_CITY_INVALID(HttpStatus.BAD_REQUEST, false, "CITY와 REGION이 적합하지 않습니다."),
 
     // 401 Unauthorized
     TOKEN_VALIDATION_FAILURE(HttpStatus.UNAUTHORIZED, false, "토큰 검증 실패"),
