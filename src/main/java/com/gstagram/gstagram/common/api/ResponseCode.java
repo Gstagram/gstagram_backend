@@ -24,6 +24,8 @@ public enum ResponseCode {
     CHECK_NOT_FOUND(HttpStatus.NOT_FOUND, false, "체크를 찾을 수 없습니다."),
     REGION_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 지역을 찾을 수 없습니다."),
     BOOKLET_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 책자를 찾을 수 없습니다."),
+    COURSE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 경로를 찾을 수 없습니다."),
+    PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 place를 찾을 수 없습니다."),
 
     // 409 Conflict
     USER_ALREADY_EXIST(HttpStatus.CONFLICT, false, "이미 가입한 사용자입니다."),
@@ -42,8 +44,13 @@ public enum ResponseCode {
 
     TOKEN_REISSUE_SUCCESS(HttpStatus.OK, true, "토큰 재발급 성공"),
 
+    COURSE_UPDATE_SUCCESS(HttpStatus.OK, true, "course 수정 성공"),
+    COURSE_DELETED_SUCCESS(HttpStatus.OK, true, "course 삭제 성공"),
     // 201 Created
-    USER_CREATE_SUCCESS(HttpStatus.CREATED, true, "사용자 생성 성공");
+    USER_CREATE_SUCCESS(HttpStatus.CREATED, true, "사용자 생성 성공"),
+    COURSE_CREATED_SUCCESS(HttpStatus.CREATED, true, "경로 게시글 생성 성공");
+
+
 
     private final HttpStatus httpStatus;
     private final boolean success;
