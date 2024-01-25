@@ -45,13 +45,13 @@ public class PlaceService {
     /**
      * update
      *
-     * @param placeId        찾을 place의 Id(PK)값
      * @param placeUpdateDTO place의 필드값을 변경할 DTO (service 계층을 쓰기위한 dto)
      * @return 수정한 place
      * @throws PlaceException 주어진 ID를 가진 Place가 데이터베이스에 존재하지 않을 때 발생
      */
     @Transactional
     public Place changePlace(Long placeId, PlaceUpdateDTO placeUpdateDTO) {
+
         Place place = placeRepository.findById(placeId).orElseThrow(() -> new PlaceException(ResponseCode.PLACE_NOT_FOUND));
         updateEntity(placeUpdateDTO, place);
         return place;
@@ -86,6 +86,10 @@ public class PlaceService {
         }
         if (placeUpdateDTO.getSequence() != null && StringUtils.hasText(placeUpdateDTO.getSequence().toString())) {
             place.changeSequence(placeUpdateDTO.getSequence());
+        }
+        if (placeUpdateDTO.getImageList() != null && !placeUpdateDTO.getImageList().isEmpty()) {
+            placeUpdateDTO.getImageList().forEach(place::addImage);
+
         }
     }
 

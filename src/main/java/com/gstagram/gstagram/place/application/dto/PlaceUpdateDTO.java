@@ -7,13 +7,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
 public class PlaceUpdateDTO {
-    @NotNull
-    Long placeId;
+
 
     String placeName;
 
@@ -24,5 +25,6 @@ public class PlaceUpdateDTO {
     Double longitude;
 
     Integer sequence;
+    List<String> imageList;
 
 }
