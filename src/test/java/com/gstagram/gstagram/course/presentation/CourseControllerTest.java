@@ -48,6 +48,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = CourseController.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @AutoConfigureMockMvc(addFilters = false)
+@WithMockUser("test1@example.com")
 class CourseControllerTest {
 
     private final User testUser = User.builder()
@@ -73,10 +74,8 @@ class CourseControllerTest {
     private PlaceService placeService;
     @MockBean
     private UserRepository userRepository;
-
     @InjectMocks
     private CourseController courseController;
-
 
     @BeforeEach
     void setUp() {
@@ -98,7 +97,7 @@ class CourseControllerTest {
 
     @Test
     @DisplayName("createCourse: Course 생성 테스트")
-    @WithMockUser("test1@example.com")
+
     public void createCourseTest() throws Exception {
         // given
         PlaceRequestDTO placeRequestDTO = PlaceRequestDTO.builder()
@@ -130,7 +129,6 @@ class CourseControllerTest {
 
     @Test
     @DisplayName("createCourse: Course 생성 - 지역 에러 검증")
-    @WithMockUser("test1@example.com")
     public void createCourseTest_regionError() throws Exception {
         // given
         // 경상북도 김해시 (전라북도 용인시의 개념으로 보면 됨)
@@ -164,7 +162,6 @@ class CourseControllerTest {
 
     @Test
     @DisplayName("updateCourse: Course 수정 테스트")
-    @WithMockUser("test1@example.com")
     void updateCourseTest() throws Exception {
         // given
         CourseUpdateDTO courseUpdateDTO = CourseUpdateDTO.builder()
@@ -188,7 +185,6 @@ class CourseControllerTest {
 
     @Test
     @DisplayName("deleteCourse: Course 삭제 테스트")
-    @WithMockUser("test1@example.com")
     void deleteCourseTest() throws Exception {
         // given
         Long courseId = 1L;
@@ -206,7 +202,6 @@ class CourseControllerTest {
 
     @Test
     @DisplayName("addPlace: Course에 Place 추가 테스트")
-    @WithMockUser("test1@example.com")
     void addPlaceTest() throws Exception {
         // given
         Long courseId = 2L;
