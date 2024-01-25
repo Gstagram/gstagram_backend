@@ -58,4 +58,21 @@ public class Place {
     public void changeSequence(Integer sequence) {
         this.sequence = sequence;
     }
+
+    public PlaceImage addImage(String image){
+        if (this.getPlaceImageList() == null){
+            this.placeImageList = new ArrayList<>();
+        }
+        PlaceImage placeImage = PlaceImage.builder().imageURL(image).place(this).build();
+        placeImageList.add(placeImage);
+        return placeImage;
+    }
+
+    public List<String> getImageURLString(){
+        if (this.getPlaceImageList() == null){
+            return new ArrayList<>();
+        }
+        return placeImageList.stream().map(placeImage -> placeImage.getImageURL()).toList();
+    }
+
 }
