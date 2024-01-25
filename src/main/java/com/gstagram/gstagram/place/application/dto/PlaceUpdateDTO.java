@@ -1,6 +1,7 @@
 package com.gstagram.gstagram.place.application.dto;
 
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 public class PlaceUpdateDTO {
-
+    @NotNull
     Long placeId;
 
     String placeName;
