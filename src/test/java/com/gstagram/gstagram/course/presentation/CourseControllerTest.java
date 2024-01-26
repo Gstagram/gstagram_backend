@@ -46,7 +46,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Slf4j
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(controllers = CourseController.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @AutoConfigureMockMvc(addFilters = false)
 @WithMockUser("test1@example.com")
 class CourseControllerTest {
