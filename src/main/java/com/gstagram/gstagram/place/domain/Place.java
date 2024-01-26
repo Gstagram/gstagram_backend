@@ -72,7 +72,7 @@ public class Place {
         if (this.getPlaceImageList() == null){
             return new ArrayList<>();
         }
-        return placeImageList.stream().map(placeImage -> placeImage.getImageURL()).toList();
+        return placeImageList.stream().map(PlaceImage::getImageURL).toList();
     }
 
 }

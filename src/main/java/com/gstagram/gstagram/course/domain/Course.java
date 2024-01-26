@@ -5,6 +5,9 @@ import com.gstagram.gstagram.region.domain.Region;
 import com.gstagram.gstagram.user.domain.User;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -35,6 +38,10 @@ public class Course {
     private City city;
 
     private String thumbNailUrl;
+
+    @Column(updatable = false)
+    @CreatedDate
+    private LocalDateTime createdTime;
 
     public void changeCourseName(String courseName) {
         this.courseName = courseName;
