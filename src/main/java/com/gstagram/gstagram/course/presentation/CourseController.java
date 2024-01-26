@@ -5,6 +5,7 @@ import com.gstagram.gstagram.city.domain.City;
 import com.gstagram.gstagram.common.api.ApiResponse;
 import com.gstagram.gstagram.common.api.ResponseCode;
 import com.gstagram.gstagram.course.application.CourseService;
+import com.gstagram.gstagram.course.application.dto.CourseWithPlaceDTO;
 import com.gstagram.gstagram.course.domain.Course;
 import com.gstagram.gstagram.course.presentation.dto.request.CourseCreateDTO;
 import com.gstagram.gstagram.course.presentation.dto.request.CourseUpdateDTO;
@@ -102,6 +103,14 @@ public class CourseController {
         Place place = PlaceRequestDTO.toEntity(placeRequestDTO, course);
         placeService.savePlace(place);
         return ApiResponse.success(ResponseCode.COURSE_UPDATE_SUCCESS, true);
+    }
+
+
+    @Operation(summary = "course 조회", description = "course id로 course와 course 하위의 place를 조회")
+    @GetMapping("/{courseId}")
+    public ApiResponse<CourseWithPlaceDTO> getCourseWithPlace(@PathVariable("courseId") Long courseId) {
+        CourseWithPlaceDTO courseWithPlace = courseService.findCourseWithPlaceByCourseId(courseId);
+        return ApiResponse.success(ResponseCode.COURSE_ACCESS_SUCCESS, courseWithPlace);
     }
 
 
