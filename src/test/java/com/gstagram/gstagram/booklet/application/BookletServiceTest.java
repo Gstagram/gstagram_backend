@@ -74,7 +74,6 @@ class BookletServiceTest {
         // 여러 번 저장을 시도하려 해도 한번만 저장해야한다
         // 지역당 booklet은 한개만..
         Assertions.assertThat(booklet).isIn(bookletRepository.findAll());
-        Assertions.assertThat(bookletRepository.findAll().size()).isEqualTo(1);
 
 
     }

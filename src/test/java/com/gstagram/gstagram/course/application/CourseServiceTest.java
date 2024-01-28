@@ -1,8 +1,10 @@
 package com.gstagram.gstagram.course.application;
 
 import com.gstagram.gstagram.common.exception.CourseException;
-import com.gstagram.gstagram.course.application.dto.CourseWithPlaceDTO;
+import com.gstagram.gstagram.course.application.dto.request.CourseSearchDTO;
+import com.gstagram.gstagram.course.application.dto.response.CourseWithPlaceDTO;
 import com.gstagram.gstagram.course.domain.Course;
+import com.gstagram.gstagram.course.presentation.dto.request.CourseFindCond;
 import com.gstagram.gstagram.course.repository.CourseRepository;
 import com.gstagram.gstagram.place.domain.Place;
 import com.gstagram.gstagram.place.repository.PlaceRepository;
@@ -14,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +24,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 @Slf4j
@@ -148,4 +152,7 @@ public class CourseServiceTest {
         Mockito.verify(courseRepository).delete(course);
         Mockito.verify(placeRepository).deleteAllByCourse(course);
     }
+
+
+
 }

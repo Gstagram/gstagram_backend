@@ -2,6 +2,8 @@ package com.gstagram.gstagram.place.application;
 
 import com.gstagram.gstagram.place.application.dto.PlaceUpdateDTO;
 import com.gstagram.gstagram.place.domain.Place;
+import com.gstagram.gstagram.place.domain.PlaceImage;
+import com.gstagram.gstagram.place.repository.PlaceImageRepository;
 import com.gstagram.gstagram.place.repository.PlaceRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +29,9 @@ class PlaceServiceTest {
 
     @Mock
     PlaceRepository placeRepository;
+
+    @Mock
+    PlaceImageRepository placeImageRepository;
 
     @InjectMocks
     PlaceService placeService;
@@ -74,6 +80,9 @@ class PlaceServiceTest {
 
         Place place = Place.builder().id(placeId).placeName("Old Name").description("Old Description").build();
         when(placeRepository.findById(placeId)).thenReturn(Optional.of(place));
+        when(placeImageRepository.save(any(PlaceImage.class))).thenReturn(PlaceImage.builder()
+                .imageURL("https://yeeeeum.s3.ap-northeast-2.amazonaws.com/%EC%84%9C%EC%9A%B81.jpeg")
+                .build());
 
         // when
         Place updatedPlace = placeService.changePlace(placeId, placeUpdateDTO);
