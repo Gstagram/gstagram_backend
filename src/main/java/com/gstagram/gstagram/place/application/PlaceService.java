@@ -4,6 +4,8 @@ import com.gstagram.gstagram.common.api.ResponseCode;
 import com.gstagram.gstagram.common.exception.PlaceException;
 import com.gstagram.gstagram.place.application.dto.PlaceUpdateDTO;
 import com.gstagram.gstagram.place.domain.Place;
+import com.gstagram.gstagram.place.domain.PlaceImage;
+import com.gstagram.gstagram.place.repository.PlaceImageRepository;
 import com.gstagram.gstagram.place.repository.PlaceRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.util.StringUtils;
 @Transactional(readOnly = true)
 public class PlaceService {
     private final PlaceRepository placeRepository;
+    private final PlaceImageRepository placeImageRepository;
 
 
     /**
@@ -88,7 +91,11 @@ public class PlaceService {
             place.changeSequence(placeUpdateDTO.getSequence());
         }
         if (placeUpdateDTO.getImageList() != null && !placeUpdateDTO.getImageList().isEmpty()) {
-            placeUpdateDTO.getImageList().forEach(place::addImage);
+            placeUpdateDTO.getImageList().forEach((image) -> {
+
+                PlaceImage placeImage = placeImageRepository.save(PlaceImage.builder().place(place).imageURL(image).build());
+                place.addImage(placeImage);
+            });
 
         }
     }
