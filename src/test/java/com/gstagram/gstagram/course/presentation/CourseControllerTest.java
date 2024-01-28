@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gstagram.gstagram.city.application.CityService;
 import com.gstagram.gstagram.city.domain.City;
 import com.gstagram.gstagram.course.application.CourseService;
+import com.gstagram.gstagram.course.application.dto.request.CourseSearchDTO;
 import com.gstagram.gstagram.course.domain.Course;
 import com.gstagram.gstagram.course.presentation.dto.request.CourseCreateDTO;
+import com.gstagram.gstagram.course.presentation.dto.request.CourseFindCond;
 import com.gstagram.gstagram.course.presentation.dto.request.CourseUpdateDTO;
 import com.gstagram.gstagram.course.presentation.dto.request.PlaceRequestDTO;
 import com.gstagram.gstagram.place.application.PlaceService;
@@ -18,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -26,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -38,10 +40,10 @@ import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
@@ -226,4 +228,30 @@ class CourseControllerTest {
     }
 
 
+    @Test
+    public void testGetCourseByCond() throws Exception {
+        //given
+        List<Course> mockCourses = List.of(Course.builder()
+                .region(Region.builder().build())
+                .city(City.builder().build())
+                .user(testUser)
+                .courseName("123")
+                .description("123")
+                .createdTime(LocalDateTime.now())
+                .build());
+
+
+        when(courseService.findCourseWithCondOrderByDate(any(CourseSearchDTO.class), any(Pageable.class)))
+                .thenReturn(mockCourses);
+        CourseFindCond courseFindCond = CourseFindCond.builder().pageNumber(1).pageSize(1).build();
+
+        //when && then
+        mockMvc.perform(get("/api/course/findCourse")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(courseFindCond)))
+                .andExpect(jsonPath("$.header.code").value(200))
+                .andExpect(jsonPath("$.msg").value("course 조회 성공"));
+
+        verify(courseService, times(1)).findCourseWithCondOrderByDate(any(CourseSearchDTO.class), any(Pageable.class));
+    }
 }
