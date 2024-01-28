@@ -1,18 +1,27 @@
 package com.gstagram.gstagram.course.application;
 
+import com.gstagram.gstagram.city.domain.City;
+import com.gstagram.gstagram.city.repository.CityRepository;
 import com.gstagram.gstagram.common.api.ResponseCode;
 import com.gstagram.gstagram.common.exception.CourseException;
-import com.gstagram.gstagram.course.application.dto.CourseWithPlaceDTO;
+import com.gstagram.gstagram.course.application.dto.request.CourseSearchDTO;
+import com.gstagram.gstagram.course.application.dto.response.CourseWithPlaceDTO;
 import com.gstagram.gstagram.course.domain.Course;
 import com.gstagram.gstagram.course.repository.CourseRepository;
+import com.gstagram.gstagram.course.repository.dto.CourseSearchCond;
 import com.gstagram.gstagram.place.domain.Place;
 import com.gstagram.gstagram.place.repository.PlaceRepository;
+import com.gstagram.gstagram.region.domain.Region;
+import com.gstagram.gstagram.region.repository.RegionRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +29,8 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class CourseService {
 
+    private final RegionRepository regionRepository;
+    private final CityRepository cityRepository;
     private final CourseRepository courseRepository;
     private final PlaceRepository placeRepository;
 
@@ -102,6 +113,48 @@ public class CourseService {
         courseRepository.delete(course);
         placeRepository.deleteAllByCourse(course);
 
+    }
+
+
+    /**
+     * SEARCH
+     * 조건에 맞는 course들 조회
+     *
+     * @param courseSearchDTO 조회할 course 조건 (city, region, 제목)
+     * @param pageable        course의 paging을 위한 parameter
+     * @return 조회된 course entity를 return
+     */
+    //조건 + paging 숫자
+    public List<Course> findCourseWithCondOrderByDate(CourseSearchDTO courseSearchDTO, Pageable pageable) {
+        List<Region> regions = new ArrayList<>();
+        fetchRegions(courseSearchDTO, regions);
+        List<City> cities = new ArrayList<>();
+        fetchCities(courseSearchDTO, cities);
+        CourseSearchCond cond = CourseSearchCond.builder().courseTitle(courseSearchDTO.getCourseTitle())
+                .cityList(cities)
+                .regionList(regions).build();
+        Page<Course> courses = courseRepository.searchCourseBySearchConditionOrderByDate(cond, pageable);
+        return courses.get().toList();
+
+    }
+
+
+    private void fetchRegions(CourseSearchDTO courseSearchDTO, List<Region> regions) {
+        courseSearchDTO.getRegionNameList().forEach(s -> {
+            List<Region> regions1 = regionRepository.findRegionByRegionNameContaining(s);
+            if (!regions.isEmpty()) {
+                regions.add(regions1.get(0));
+            }
+        });
+    }
+
+    private void fetchCities(CourseSearchDTO courseSearchDTO, List<City> cities) {
+        courseSearchDTO.getRegionNameList().forEach(s -> {
+            List<City> cities1 = cityRepository.findByCityNameContaining(s);
+            if (!cities1.isEmpty()) {
+                cities.add(cities1.get(0));
+            }
+        });
     }
 
 

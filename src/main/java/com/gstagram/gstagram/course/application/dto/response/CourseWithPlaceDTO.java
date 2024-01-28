@@ -1,4 +1,4 @@
-package com.gstagram.gstagram.course.application.dto;
+package com.gstagram.gstagram.course.application.dto.response;
 
 import com.gstagram.gstagram.course.domain.Course;
 import com.gstagram.gstagram.place.domain.Place;
