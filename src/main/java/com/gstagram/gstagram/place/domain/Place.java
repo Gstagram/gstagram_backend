@@ -59,13 +59,12 @@ public class Place {
         this.sequence = sequence;
     }
 
-    public PlaceImage addImage(String image){
+    //비영속 상태의 객체이기 때문에 return 하면 안될 듯
+    public void addImage(PlaceImage placeImage){
         if (this.getPlaceImageList() == null){
             this.placeImageList = new ArrayList<>();
         }
-        PlaceImage placeImage = PlaceImage.builder().imageURL(image).place(this).build();
         placeImageList.add(placeImage);
-        return placeImage;
     }
 
     public List<String> getImageURLString(){
