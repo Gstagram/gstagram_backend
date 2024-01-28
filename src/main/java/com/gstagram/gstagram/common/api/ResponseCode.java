@@ -46,6 +46,7 @@ public enum ResponseCode {
     TOKEN_REISSUE_SUCCESS(HttpStatus.OK, true, "토큰 재발급 성공"),
 
     COURSE_UPDATE_SUCCESS(HttpStatus.OK, true, "course 수정 성공"),
+    COURSE_ACCESS_SUCCESS(HttpStatus.OK, true, "course 조회 성공"),
     COURSE_DELETED_SUCCESS(HttpStatus.OK, true, "course 삭제 성공"),
     // 201 Created
     USER_CREATE_SUCCESS(HttpStatus.CREATED, true, "사용자 생성 성공"),

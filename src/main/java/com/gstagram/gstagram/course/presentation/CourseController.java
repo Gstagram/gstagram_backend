@@ -5,11 +5,14 @@ import com.gstagram.gstagram.city.domain.City;
 import com.gstagram.gstagram.common.api.ApiResponse;
 import com.gstagram.gstagram.common.api.ResponseCode;
 import com.gstagram.gstagram.course.application.CourseService;
-import com.gstagram.gstagram.course.application.dto.CourseWithPlaceDTO;
+import com.gstagram.gstagram.course.application.dto.request.CourseSearchDTO;
+import com.gstagram.gstagram.course.application.dto.response.CourseWithPlaceDTO;
 import com.gstagram.gstagram.course.domain.Course;
 import com.gstagram.gstagram.course.presentation.dto.request.CourseCreateDTO;
+import com.gstagram.gstagram.course.presentation.dto.request.CourseFindCond;
 import com.gstagram.gstagram.course.presentation.dto.request.CourseUpdateDTO;
 import com.gstagram.gstagram.course.presentation.dto.request.PlaceRequestDTO;
+import com.gstagram.gstagram.course.presentation.dto.response.CourseResponseDTO;
 import com.gstagram.gstagram.place.application.PlaceService;
 import com.gstagram.gstagram.place.domain.Place;
 import com.gstagram.gstagram.region.application.RegionService;
@@ -21,6 +24,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
@@ -112,6 +116,20 @@ public class CourseController {
         CourseWithPlaceDTO courseWithPlace = courseService.findCourseWithPlaceByCourseId(courseId);
         return ApiResponse.success(ResponseCode.COURSE_ACCESS_SUCCESS, courseWithPlace);
     }
+
+
+    @Operation(summary = "course만 cond로 조회", description = "course로 cond에 따라 조회")
+    @GetMapping("/findCourse")
+    public ApiResponse<List<CourseResponseDTO>> getCourseByCond(@RequestBody CourseFindCond courseFindCond) {
+
+        CourseSearchDTO serviceDTO = courseFindCond.toServiceDTO();
+        List<Course> courses = courseService.findCourseWithCondOrderByDate(serviceDTO, PageRequest.of(courseFindCond.getPageNumber(), courseFindCond.getPageSize()));
+        List<CourseResponseDTO> responseDTOS = courses.stream().map(CourseResponseDTO::from).toList();
+        return ApiResponse.success(ResponseCode.COURSE_ACCESS_SUCCESS, responseDTOS);
+    }
+
+
+
 
 
     private boolean isCityNotInRegion(Region region, City city) {
