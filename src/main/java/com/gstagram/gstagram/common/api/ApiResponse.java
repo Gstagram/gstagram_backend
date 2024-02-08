@@ -1,10 +1,7 @@
 package com.gstagram.gstagram.common.api;
 
-import com.gstagram.gstagram.booklet.controller.dto.response.BookletResponseDTO;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
