@@ -27,6 +27,7 @@ public enum ResponseCode {
     BOOKLET_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 책자를 찾을 수 없습니다."),
     COURSE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 경로를 찾을 수 없습니다."),
     PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 place를 찾을 수 없습니다."),
+    LIKE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 좋아요를 찾을 수 없습니다."),
 
     // 409 Conflict
     USER_ALREADY_EXIST(HttpStatus.CONFLICT, false, "이미 가입한 사용자입니다."),
@@ -48,9 +49,12 @@ public enum ResponseCode {
     COURSE_UPDATE_SUCCESS(HttpStatus.OK, true, "course 수정 성공"),
     COURSE_ACCESS_SUCCESS(HttpStatus.OK, true, "course 조회 성공"),
     COURSE_DELETED_SUCCESS(HttpStatus.OK, true, "course 삭제 성공"),
+    LIKE_READ_SUCCESS(HttpStatus.OK, true, "좋아요 여부 확인 성공"),
+    LIKE_DELETED_SUCCESS(HttpStatus.OK, true, "좋아요 삭제 성공"),
     // 201 Created
     USER_CREATE_SUCCESS(HttpStatus.CREATED, true, "사용자 생성 성공"),
-    COURSE_CREATED_SUCCESS(HttpStatus.CREATED, true, "경로 게시글 생성 성공");
+    COURSE_CREATED_SUCCESS(HttpStatus.CREATED, true, "경로 게시글 생성 성공"),
+    LIKE_CREATED_SUCCESS(HttpStatus.CREATED, true, "좋아요 생성 성공");
 
 
 
