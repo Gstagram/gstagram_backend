@@ -2,20 +2,26 @@ package com.gstagram.gstagram.user.application;
 
 import com.gstagram.gstagram.auth.component.JwtTokenProvider;
 import com.gstagram.gstagram.user.domain.User;
+import com.gstagram.gstagram.user.dto.ResponseUserDto;
+import com.gstagram.gstagram.user.dto.UpdateUserDto;
 import com.gstagram.gstagram.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
-    @Mock
-    private UserService userService;
+    @InjectMocks
+    private UserServiceImpl userService;
 
     @Mock
     private JwtTokenProvider jwtTokenProvider;
@@ -40,22 +46,22 @@ public class UserServiceTest {
     @Test
     public void 유저조회_성공(){
         // given
-        when(userRepository.findByUuid(any(User.class))).thenReturn(user);
+        given(userRepository.findByUuid(any(String.class))).willReturn(Optional.of(user));
 
         // when
-        User user = userService.getUserInfoByUuid("testUserUuid");
+        ResponseUserDto responseUserDto = userService.getUserInfoByUuid("testUserUuid");
 
         // then
-        assertEquals(user.getEmail(), testUserEmail);
-        assertEquals(user.getPassword(), testUserPassword);
+        assertEquals(testUserEmail, responseUserDto.getEmail());
     }
 
     @Test
     public void 유저정보_수정_성공(){
         // given
-        when(userRepository.findByUuid(any(User.class))).thenReturn(user);
-        when(userRepository.save(any(User.class))).thenReturn(user);
+        given(userRepository.findByUuid(any(String.class))).willReturn(Optional.of(user));
+        given(userRepository.save(any(User.class))).willReturn(user);
         UpdateUserDto updateUserDto = UpdateUserDto.builder()
+                .uuid("testUserUuid")
                 .nickname("testUserNickname")
                 .profileS3ImageUrl("testUserImageUrl")
                 .build();
@@ -70,9 +76,10 @@ public class UserServiceTest {
     @Test
     public void 유저정보_수정_실패(){
         // given
-        when(userRepository.findByUuid(any(User.class))).thenReturn(user);
-        when(userRepository.save(any(User.class))).thenReturn(user);
+        given(userRepository.findByUuid(any(String.class))).willReturn(Optional.of(user));
+        given(userRepository.save(any(User.class))).willReturn(user);
         UpdateUserDto updateUserDto = UpdateUserDto.builder()
+                .uuid("testUserUuid")
                 .nickname("")
                 .profileS3ImageUrl("")
                 .build();
@@ -87,7 +94,7 @@ public class UserServiceTest {
     @Test
     public void 유저_삭제_성공(){
         // given
-        when(userRepository.findByUuid(any(User.class))).thenReturn(user);
+        given(userRepository.findByUuid(any(String.class))).willReturn(Optional.of(user));
         doNothing().when(userRepository).delete(any(User.class));
 
         // when
