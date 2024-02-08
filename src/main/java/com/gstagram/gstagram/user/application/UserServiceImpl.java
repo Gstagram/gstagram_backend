@@ -16,18 +16,13 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
 
-    public ResponseUserDto getUserInfoByUuid(String uuid){
-        User user = userRepository.findByUuid(uuid).orElseThrow(() -> new UserException(ResponseCode.USER_NOT_FOUND));
-        return ResponseUserDto.builder()
-                .email(user.getEmail())
-                .username(user.getUsername())
-                .nickname(user.getNickname())
-                .profileImageS3Url(user.getProfileImageS3Url())
-                .build();
+    public User getUserInfoByUuid(String uuid){
+        return userRepository.findByUuid(uuid).orElseThrow(() -> new UserException(ResponseCode.USER_NOT_FOUND));
+
     }
 
-    public void updateUserInfo(UpdateUserDto updateUserDto){
-        User user = userRepository.findByUuid(updateUserDto.getUuid()).orElseThrow(() -> new UserException(ResponseCode.USER_NOT_FOUND));
+    public void updateUserInfo(UpdateUserDto updateUserDto, String uuid){
+        User user = userRepository.findByUuid(uuid).orElseThrow(() -> new UserException(ResponseCode.USER_NOT_FOUND));
         user.updateUser(updateUserDto);
         userRepository.save(user);
     }

@@ -48,11 +48,8 @@ public class UserServiceTest {
         // given
         given(userRepository.findByUuid(any(String.class))).willReturn(Optional.of(user));
 
-        // when
-        ResponseUserDto responseUserDto = userService.getUserInfoByUuid("testUserUuid");
-
         // then
-        assertEquals(testUserEmail, responseUserDto.getEmail());
+        assertEquals(testUserEmail, userService.getUserInfoByUuid("testUserUuid").getEmail());
     }
 
     @Test
@@ -61,13 +58,12 @@ public class UserServiceTest {
         given(userRepository.findByUuid(any(String.class))).willReturn(Optional.of(user));
         given(userRepository.save(any(User.class))).willReturn(user);
         UpdateUserDto updateUserDto = UpdateUserDto.builder()
-                .uuid("testUserUuid")
                 .nickname("testUserNickname")
                 .profileS3ImageUrl("testUserImageUrl")
                 .build();
 
         // when
-        userService.updateUserInfo(updateUserDto);
+        userService.updateUserInfo(updateUserDto, "testUserUuid");
 
         // then
         verify(userRepository, times(1)).save(any(User.class));
@@ -79,13 +75,12 @@ public class UserServiceTest {
         given(userRepository.findByUuid(any(String.class))).willReturn(Optional.of(user));
         given(userRepository.save(any(User.class))).willReturn(user);
         UpdateUserDto updateUserDto = UpdateUserDto.builder()
-                .uuid("testUserUuid")
                 .nickname("")
                 .profileS3ImageUrl("")
                 .build();
 
         // when
-        userService.updateUserInfo(updateUserDto);
+        userService.updateUserInfo(updateUserDto, "testUserUuid");
 
         // then
         verify(userRepository, times(1)).save(any(User.class));

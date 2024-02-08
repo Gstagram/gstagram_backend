@@ -1,5 +1,6 @@
 package com.gstagram.gstagram.user.dto;
 
+import com.gstagram.gstagram.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,12 +14,12 @@ public class ResponseUserDto {
     private String nickname;
     private String profileImageS3Url;
 
-    public ResponseUserDto from(String email, String username, String nickname, String profileImageS3Url){
+    public static ResponseUserDto from(User user){
         return ResponseUserDto.builder()
-                .email(email)
-                .username(username)
-                .nickname(nickname)
-                .profileImageS3Url(profileImageS3Url)
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .nickname(user.getNickname())
+                .profileImageS3Url(user.getProfileImageS3Url())
                 .build();
     }
 }

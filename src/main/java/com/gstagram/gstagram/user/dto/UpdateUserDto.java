@@ -8,7 +8,6 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class UpdateUserDto {
-    private String uuid;
     private String nickname;
     private String profileS3ImageUrl;
 }

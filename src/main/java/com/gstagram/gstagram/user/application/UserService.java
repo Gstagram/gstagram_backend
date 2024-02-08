@@ -5,9 +5,9 @@ import com.gstagram.gstagram.user.dto.ResponseUserDto;
 import com.gstagram.gstagram.user.dto.UpdateUserDto;
 
 public interface UserService {
-    ResponseUserDto getUserInfoByUuid(String uuid);
+    User getUserInfoByUuid(String uuid);
 
-    void updateUserInfo(UpdateUserDto updateUserDto);
+    void updateUserInfo(UpdateUserDto updateUserDto, String uuid);
 
     void deleteUser(String uuid);
 }
