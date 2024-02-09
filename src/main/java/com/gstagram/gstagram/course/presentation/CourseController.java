@@ -144,7 +144,31 @@ public class CourseController {
         return ApiResponse.success(ResponseCode.COURSE_ACCESS_SUCCESS, list);
     }
 
+    @GetMapping("find-by-user/{email}")
+    public ApiResponse<List<CourseWithPlaceResponseDTO>> getCourseByUserEmail(@PathVariable("email") String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UserException(ResponseCode.USER_NOT_FOUND));
+        List<Course> courses = courseService.findCourseByUser(user);
+        List<CourseWithPlaceResponseDTO> list = courses.stream().map(course -> getCourseWithPlaceResponseDTO(course.getId())).toList();
+        return ApiResponse.success(ResponseCode.COURSE_ACCESS_SUCCESS, list);
+    }
+    private CourseWithPlaceResponseDTO getCourseWithPlaceResponseDTO(CourseResponseDTO courseResponseDTO, List<PlaceResponseDTO> placeResponseDTOS) {
+        CourseWithPlaceResponseDTO response = CourseWithPlaceResponseDTO.builder()
+                .courseResponseDTO(courseResponseDTO).placeResponseDTOList(placeResponseDTOS).build();
+        return response;
+    }
 
+    private CourseWithPlaceResponseDTO getCourseWithPlaceResponseDTO(Long courseId) {
+        CourseWithPlaceDTO courseWithPlace = courseService.findCourseWithPlaceByCourseId(courseId);
+
+        Course course = courseWithPlace.getCourse();
+        List<Place> placeList = courseWithPlace.getPlaceList();
+
+        CourseResponseDTO courseResponseDTO = CourseResponseDTO.from(course);
+        List<PlaceResponseDTO> placeResponseDTOS = placeList.stream().map(PlaceResponseDTO::from).toList();
+
+        CourseWithPlaceResponseDTO response = getCourseWithPlaceResponseDTO(courseResponseDTO, placeResponseDTOS);
+        return response;
+    }
 
 
 
