@@ -13,8 +13,10 @@ import com.gstagram.gstagram.course.presentation.dto.request.CourseFindCond;
 import com.gstagram.gstagram.course.presentation.dto.request.CourseUpdateDTO;
 import com.gstagram.gstagram.course.presentation.dto.request.PlaceRequestDTO;
 import com.gstagram.gstagram.course.presentation.dto.response.CourseResponseDTO;
+import com.gstagram.gstagram.course.presentation.dto.response.CourseWithPlaceResponseDTO;
 import com.gstagram.gstagram.place.application.PlaceService;
 import com.gstagram.gstagram.place.domain.Place;
+import com.gstagram.gstagram.place.presentation.dto.response.PlaceResponseDTO;
 import com.gstagram.gstagram.region.application.RegionService;
 import com.gstagram.gstagram.region.domain.Region;
 import com.gstagram.gstagram.user.domain.User;
@@ -112,9 +114,21 @@ public class CourseController {
 
     @Operation(summary = "course 조회", description = "course id로 course와 course 하위의 place를 조회")
     @GetMapping("/{courseId}")
-    public ApiResponse<CourseWithPlaceDTO> getCourseWithPlace(@PathVariable("courseId") Long courseId) {
+    public ApiResponse<CourseWithPlaceResponseDTO> getCourseWithPlace(@PathVariable("courseId") Long courseId) {
+
         CourseWithPlaceDTO courseWithPlace = courseService.findCourseWithPlaceByCourseId(courseId);
-        return ApiResponse.success(ResponseCode.COURSE_ACCESS_SUCCESS, courseWithPlace);
+
+        Course course = courseWithPlace.getCourse();
+        List<Place> placeList = courseWithPlace.getPlaceList();
+
+        CourseResponseDTO courseResponseDTO = CourseResponseDTO.from(course);
+        List<PlaceResponseDTO> placeResponseDTOS = placeList.stream().map(PlaceResponseDTO::from).toList();
+
+        CourseWithPlaceResponseDTO response = CourseWithPlaceResponseDTO.builder()
+                .courseResponseDTO(courseResponseDTO).placeResponseDTOList(placeResponseDTOS).build();
+
+
+        return ApiResponse.success(ResponseCode.COURSE_ACCESS_SUCCESS, response);
     }
 
 
