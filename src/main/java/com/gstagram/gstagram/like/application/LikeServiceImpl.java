@@ -13,6 +13,7 @@ import com.gstagram.gstagram.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class LikeServiceImpl implements LikeService{
     private final UserRepository userRepository;
     private final CourseRepository courseRepository;
     @Override
+    @Transactional
     public void like(String userId, Long courseId) {
         validateUser(userId);
         validateCourse(courseId);
@@ -35,6 +37,7 @@ public class LikeServiceImpl implements LikeService{
     }
 
     @Override
+    @Transactional
     public void unlike(String userId, Long courseId) {
         validateUser(userId);
         validateCourse(courseId);
@@ -43,6 +46,7 @@ public class LikeServiceImpl implements LikeService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean isLiked(String  userId, Long courseId) {
         validateUser(userId);
         validateCourse(courseId);
@@ -50,12 +54,14 @@ public class LikeServiceImpl implements LikeService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public int getLikeCount(Long courseId) {
         validateCourse(courseId);
         return likeRepository.countByCourseId(courseId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getLikeUserList(Long courseId) {
         validateCourse(courseId);
         List<Like> likeList = likeRepository.findAllByCourseId(courseId);

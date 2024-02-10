@@ -4,11 +4,16 @@ import com.gstagram.gstagram.auth.component.JwtTokenProvider;
 import com.gstagram.gstagram.common.api.ApiResponse;
 import com.gstagram.gstagram.common.api.ResponseCode;
 import com.gstagram.gstagram.like.application.LikeService;
+import com.gstagram.gstagram.user.domain.User;
+import com.gstagram.gstagram.user.dto.ResponseUserDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Tag(name = "Like", description = "좋아요 관련 API")
 @Slf4j
@@ -40,9 +45,16 @@ public class LikeController {
     // 좋아요한 유저 조회
     @Operation(summary = "[좋아요] 좋아요한 유저 조회", description = "좋아요한 유저를 조회합니다.")
     @GetMapping("/{courseId}/user")
-    public ApiResponse<Boolean> isLiked(@RequestHeader String accessToken, @PathVariable Long courseId) {
-        String userId = jwtTokenProvider.getUserPk(accessToken);
-        return ApiResponse.success(ResponseCode.LIKE_READ_SUCCESS, likeService.isLiked(userId, courseId));
+    public ApiResponse<List<ResponseUserDto>> isLiked(@PathVariable Long courseId) {
+        return ApiResponse.success(ResponseCode.LIKE_READ_SUCCESS, likeService.getLikeUserList(courseId).stream().map(
+                user -> ResponseUserDto.builder()
+                        .email(user.getEmail())
+                        .username(user.getUsername())
+                        .nickname(user.getNickname())
+                        .profileImageS3Url(user.getProfileImageS3Url())
+                        .build()
+        ).collect(Collectors.toList()
+        ));
     }
 
 }
