@@ -22,6 +22,8 @@ public class QBooklet extends EntityPathBase<Booklet> {
 
     public static final QBooklet booklet = new QBooklet("booklet");
 
+    public final ListPath<BookletCaption, QBookletCaption> bookletCaptions = this.<BookletCaption, QBookletCaption>createList("bookletCaptions", BookletCaption.class, QBookletCaption.class, PathInits.DIRECT2);
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final com.gstagram.gstagram.region.domain.QRegion region;
