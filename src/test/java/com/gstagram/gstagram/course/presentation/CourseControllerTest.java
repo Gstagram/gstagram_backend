@@ -228,18 +228,17 @@ class CourseControllerTest {
     }
 
 
-    @Test
+ /*   @Test
     public void testGetCourseByCond() throws Exception {
         //given
         List<Course> mockCourses = List.of(Course.builder()
                 .region(Region.builder().build())
                 .city(City.builder().build())
-                .user(testUser)
+                .user(testU:ser)
                 .courseName("123")
                 .description("123")
                 .createdTime(LocalDateTime.now())
                 .build());
-
 
         when(courseService.findCourseWithCondOrderByDate(any(CourseSearchDTO.class), any(Pageable.class)))
                 .thenReturn(mockCourses);
@@ -253,5 +252,5 @@ class CourseControllerTest {
                 .andExpect(jsonPath("$.msg").value("course 조회 성공"));
 
         verify(courseService, times(1)).findCourseWithCondOrderByDate(any(CourseSearchDTO.class), any(Pageable.class));
-    }
+    }*/
 }

@@ -1,6 +1,7 @@
 package com.gstagram.gstagram.user.domain;
 
 import com.gstagram.gstagram.common.base.BaseEntity;
+import com.gstagram.gstagram.user.dto.UpdateUserDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -71,5 +72,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+
+    public void updateUser(UpdateUserDto updateUserDto){
+        this.nickname = updateUserDto.getNickname();
+        this.profileImageS3Url = updateUserDto.getProfileS3ImageUrl();
     }
 }

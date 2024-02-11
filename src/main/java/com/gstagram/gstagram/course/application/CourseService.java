@@ -13,6 +13,7 @@ import com.gstagram.gstagram.place.domain.Place;
 import com.gstagram.gstagram.place.repository.PlaceRepository;
 import com.gstagram.gstagram.region.domain.Region;
 import com.gstagram.gstagram.region.repository.RegionRepository;
+import com.gstagram.gstagram.user.domain.User;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -137,6 +138,22 @@ public class CourseService {
         return courses.get().toList();
 
     }
+/*
+
+    public List<Course> findCourseWithRegion(Region region){
+
+        List<Course> courseList = courseRepository.findCourseByRegion(region);
+
+    }
+*/
+    public List<Course> findCourseWithRegion(Region region){
+
+        return courseRepository.findCourseByRegion(region);
+    }
+    public List<Course> findCourseByUser(User user){
+        return courseRepository.findCourseByUser(user);
+    }
+
 
 
     private void fetchRegions(CourseSearchDTO courseSearchDTO, List<Region> regions) {
