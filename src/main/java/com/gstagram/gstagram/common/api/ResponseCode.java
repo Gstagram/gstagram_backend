@@ -29,6 +29,7 @@ public enum ResponseCode {
     PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 place를 찾을 수 없습니다."),
     LIKE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 좋아요를 찾을 수 없습니다."),
     SCRAP_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 스크랩을 찾을 수 없습니다."),
+    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당 댓글을 찾을 수 없습니다."),
 
     // 409 Conflict
     USER_ALREADY_EXIST(HttpStatus.CONFLICT, false, "이미 가입한 사용자입니다."),
@@ -52,10 +53,14 @@ public enum ResponseCode {
     COURSE_DELETED_SUCCESS(HttpStatus.OK, true, "course 삭제 성공"),
     LIKE_READ_SUCCESS(HttpStatus.OK, true, "좋아요 여부 확인 성공"),
     LIKE_DELETED_SUCCESS(HttpStatus.OK, true, "좋아요 삭제 성공"),
+    COMMENT_READ_SUCCESS(HttpStatus.OK, true, "댓글 조회 성공"),
+    COMMENT_DELETED_SUCCESS(HttpStatus.OK, true, "댓글 삭제 성공"),
+    COMMENT_UPDATED_SUCCESS(HttpStatus.OK, true, "댓글 수정 성공"),
     // 201 Created
     USER_CREATE_SUCCESS(HttpStatus.CREATED, true, "사용자 생성 성공"),
     COURSE_CREATED_SUCCESS(HttpStatus.CREATED, true, "경로 게시글 생성 성공"),
-    LIKE_CREATED_SUCCESS(HttpStatus.CREATED, true, "좋아요 생성 성공");
+    LIKE_CREATED_SUCCESS(HttpStatus.CREATED, true, "좋아요 생성 성공"),
+    COMMENT_CREATED_SUCCESS(HttpStatus.CREATED, true, "댓글 생성 성공");
 
 
 

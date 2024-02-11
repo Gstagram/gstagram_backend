@@ -1,10 +1,13 @@
 package com.gstagram.gstagram.scrap.presentation;
 
 import com.gstagram.gstagram.auth.component.JwtTokenProvider;
+import com.gstagram.gstagram.course.domain.Course;
 import com.gstagram.gstagram.scrap.application.ScrapService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -29,9 +32,9 @@ public class ScrapController {
     }
 
     // 스크랩한 코스 조회
-    @PostMapping("/course")
-    public void getScrappedCourseList(@RequestHeader String accessToken) {
+    @PostMapping("/course") //TODO: 이 부분은 ResponseCourseDto로 변경해야함
+    public List<Course> getScrappedCourseList(@RequestHeader String accessToken) {
         String userId = jwtTokenProvider.getUserPk(accessToken);
-        scrapService.getScrappedCourseList(userId);
+        return scrapService.getScrappedCourseList(userId);
     }
 }
