@@ -3,10 +3,7 @@ package com.gstagram.gstagram.like.domain;
 import com.gstagram.gstagram.course.domain.Course;
 import com.gstagram.gstagram.user.domain.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -18,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 class LikeId implements Serializable {
     @Column(name = "user_id")
-    private Long userId;
+    private String userId;
 
     @Column(name = "course_id")
     private Long courseId;
@@ -27,10 +24,13 @@ class LikeId implements Serializable {
 @IdClass(LikeId.class)
 @Entity(name = "course_like")
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Like {
     @Id
-    private Long userId;
+    private String userId;
 
     @Id
     private Long courseId;
@@ -46,4 +46,5 @@ public class Like {
     @Column(name = "created_date", nullable = false)
     @CreatedDate
     private LocalDateTime createdDate;
+
 }

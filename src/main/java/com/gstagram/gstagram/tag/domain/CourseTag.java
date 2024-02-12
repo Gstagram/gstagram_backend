@@ -20,6 +20,8 @@ class CourseTagId implements Serializable {
 @IdClass(CourseTagId.class)
 @Entity(name = "region_course_article_tag")
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CourseTag {
     @Id

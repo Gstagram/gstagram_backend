@@ -22,4 +22,5 @@ public class ResponseUserDto {
                 .profileImageS3Url(user.getProfileImageS3Url())
                 .build();
     }
+
 }
