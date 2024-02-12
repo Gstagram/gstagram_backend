@@ -30,7 +30,7 @@ public class QLike extends EntityPathBase<Like> {
 
     public final com.gstagram.gstagram.user.domain.QUser user;
 
-    public final NumberPath<Long> userId = createNumber("userId", Long.class);
+    public final StringPath userId = createString("userId");
 
     public QLike(String variable) {
         this(Like.class, forVariable(variable), INITS);
