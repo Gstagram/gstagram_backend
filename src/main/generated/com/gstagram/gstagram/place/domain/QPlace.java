@@ -32,6 +32,8 @@ public class QPlace extends EntityPathBase<Place> {
 
     public final NumberPath<Double> longitude = createNumber("longitude", Double.class);
 
+    public final ListPath<PlaceImage, QPlaceImage> placeImageList = this.<PlaceImage, QPlaceImage>createList("placeImageList", PlaceImage.class, QPlaceImage.class, PathInits.DIRECT2);
+
     public final StringPath placeName = createString("placeName");
 
     public final NumberPath<Integer> sequence = createNumber("sequence", Integer.class);

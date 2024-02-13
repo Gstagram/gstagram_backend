@@ -26,11 +26,15 @@ public class QCourse extends EntityPathBase<Course> {
 
     public final StringPath courseName = createString("courseName");
 
+    public final DateTimePath<java.time.LocalDateTime> createdTime = createDateTime("createdTime", java.time.LocalDateTime.class);
+
     public final StringPath description = createString("description");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final com.gstagram.gstagram.region.domain.QRegion region;
+
+    public final StringPath thumbNailUrl = createString("thumbNailUrl");
 
     public final com.gstagram.gstagram.user.domain.QUser user;
 

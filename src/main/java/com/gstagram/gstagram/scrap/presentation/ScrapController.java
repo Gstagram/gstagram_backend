@@ -3,12 +3,14 @@ package com.gstagram.gstagram.scrap.presentation;
 import com.gstagram.gstagram.auth.component.JwtTokenProvider;
 import com.gstagram.gstagram.course.domain.Course;
 import com.gstagram.gstagram.scrap.application.ScrapService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Scrap", description = "Scrap API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class ScrapController {
     }
 
     // 스크랩 취소
-    @PostMapping("/{courseId}")
+    @DeleteMapping("/{courseId}")
     public void unscrap(@RequestHeader String accessToken, @PathVariable Long courseId) {
         String userId = jwtTokenProvider.getUserPk(accessToken);
         scrapService.unscrap(userId, courseId);
